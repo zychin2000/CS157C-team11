@@ -1,6 +1,13 @@
 import logo from './logo.svg';
 import './App.css';
 
+//pages...
+import YasiIndex from './pages/YasiIndex';
+import Login from './pages/Login';
+import Register from './pages/Register';
+
+
+
 function App() {
   return (
     <div className="App">
@@ -18,6 +25,9 @@ function App() {
           Learn React
         </a>
       </header>
+
+
+
     </div>
   );
 }
