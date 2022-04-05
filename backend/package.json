@@ -1,0 +1,16 @@
+{
+  "name": "yasi-backend",
+  "version": "0.0.1",
+  "description": "",
+  "main": "server.js",
+  "scripts": {
+    "dev": "nodemon server"
+  },
+  "author": "",
+  "license": "ISC",
+  "dependencies": {
+    "cassandra-driver": "^4.6.3",
+    "express": "^4.17.3",
+    "uuid": "^8.3.2"
+  }
+}
