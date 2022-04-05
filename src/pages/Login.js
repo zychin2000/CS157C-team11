@@ -12,7 +12,7 @@ function login (props){
 
     //THIS BELOW? Unsure.
     //Goal: Connect to db and check this user
-    
+
     // const onSubmit = event => {
     //   event.preventDefault();
     //   const username = this.username.value;
@@ -36,7 +36,7 @@ function login (props){
 
       <h2>Login Form</h2>
       {/* Form for logging in. Input form action later */}
-      <form onSubmit={onSubmit}>
+      <form>
         <table>
           <tr>
             <td><label for="username">Username: </label></td>
