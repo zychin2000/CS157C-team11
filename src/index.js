@@ -9,7 +9,17 @@ ReactDOM.render(
     <App />
   </React.StrictMode>,
   document.getElementById('root')
+  
 );
+{/* 
+
+App.use(express.static(__dirname));
+
+App.get("/*", function(req, res) {
+  res.sendFile(path.join(__dirname, "index.html"));
+});
+
+*/}
 
 // If you want to start measuring performance in your app, pass a function
 // to log results (for example: reportWebVitals(console.log))
