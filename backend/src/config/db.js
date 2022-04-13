@@ -7,7 +7,7 @@ console.log("New Cassandra instance is created!")
 const client = new cassandra.Client({ 
   contactPoints: ['127.0.0.1'],
   localDataCenter: 'datacenter1',
-  keyspace: 'cs157c'
+  keyspace: 'food_pantry'
 });
 
 client.connect();

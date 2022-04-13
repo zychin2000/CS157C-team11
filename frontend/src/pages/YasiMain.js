@@ -6,23 +6,16 @@
 
 import { React, useEffect, useState } from 'react';
 import { Link } from "react-router-dom";
+import NavBar from '../components/Navbar';
 
 function YasiMain (props){
     //define constants or functionalities in here
   
 
 return(
-
-  //navbar. Will eventually be refactored later on
   //TBD: After the navbar here, display options for a logged in user 
   <div>
-    <table width="100%">
-      <tr>
-        <td width="95%"><h1>YASI</h1></td>
-        <td align="right"><Link to="/">Home</Link></td>
-        <td align="right"><Link to="/logout">Logout</Link></td>
-      </tr>
-    </table>
+    <NavBar />
 
 
   </div>

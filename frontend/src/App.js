@@ -8,7 +8,8 @@ import YasiIndex from './pages/YasiIndex';
 import Login from './pages/Login';
 import Register from './pages/Register';
 import Logout from './pages/Logout';
-import YasiMain from './pages/YasiMain'
+import YasiMain from './pages/YasiMain';
+import NavBar from './components/Navbar';
 
 function App() {
   return (
