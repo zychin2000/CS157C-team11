@@ -36,3 +36,50 @@
     transform: rotate(360deg);
   }
 }
+
+body {
+  font-family: 'Lucida Sans', 'Lucida Sans Regular', 'Lucida Grande', 'Lucida Sans Unicode', Geneva, Verdana, sans-serif;
+}
+
+.navbar {
+  position: relative;
+  font-family: 'Lucida Sans', 'Lucida Sans Regular', 'Lucida Grande', 'Lucida Sans Unicode', Geneva, Verdana, sans-serif;
+}
+.navbar::before {
+  content:'';
+  background: url('./images/backgrounds/yasi_navbar_pic.jpeg') no-repeat center center;
+  position: absolute;
+  top:0px;
+  left: 0px;
+  width:100%;
+  height:100%;
+  z-index:-1;
+  opacity: 0.55; 
+  background-size:cover
+}
+.navbarContent {
+  padding: 6px;
+  margin-left: 10px;
+}
+
+.imageContent {
+  position:relative;
+}
+
+.imageContent::before {
+  content:'';
+  background: url('./images/backgrounds/yasi_index_pantry_pic.jpeg') no-repeat center center;
+  position: absolute;
+  top:0px;
+  left: 0px;
+  width:100%;
+  height:100%;
+  z-index:-1;
+  opacity: 0.55; 
+  background-size:cover
+}
+
+.formTable {
+  width:25%;
+  text-align: left;
+}

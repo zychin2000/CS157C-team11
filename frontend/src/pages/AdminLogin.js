@@ -1,29 +1,44 @@
-//login page for admin only!!
-//a regular user won't be able to access that super easily
+// A login page strictly for Admins
 
 import { React, useEffect, useState } from 'react';
 import { Link } from "react-router-dom";
+import NavBar from '../components/Navbar';
 
-function adminLogin (props){
-    //define constants or functionalities in here
+function AdminLogin(props) {
+  //login will ask for username/email and password
+  const [email, setEmail] = useState('');
+  const [password, setPassword] = useState('');
 
-    
+  //TBD: Access to db and see if user exists...
+  const login = (event) => {
+    event.preventDefault();
+    //something here to look for user
+  }
 
-    //below is basically what we will see
-    return(
-      //navbar
-      <div>
-      <table width="100%">
-        <tr color="#ff9238">
-          <td width="95%"><h1>YASI</h1></td>
-          <td align="right"><Link to="/">Home</Link></td>
-          <td align="right"><Link to="/login">Login</Link></td>
-          <td align="right"><Link to="/register">Register</Link></td>
-        </tr>
-      </table>
+  return (
+    <div>
+      <NavBar />
+
+      <h2>Admin Login Form</h2>
+      {/* Form for logging in. Input form action later */}
+      <form>
+        <table className="formTable">
+          <tr>
+            <td><label for="email">Email: </label></td>
+            <td><input type="text" name="username" value={email} onChange={(e) => setEmail(e.target.value)}/></td>
+          </tr>
+          <tr>
+            <td><label for="password">Password: </label></td>
+            <td><input type="text" name="password" value={password} onChange={(e) => setPassword(e.target.value)}/></td>
+          </tr>
+          <tr>
+            <td><br /><input type="submit" value="Submit" /></td>
+          </tr>
+        </table>
+      </form>
     </div>
-    );
+  );
 
 }
 
-export default adminLogin;
+export default AdminLogin;

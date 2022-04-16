@@ -22,7 +22,8 @@ const updateItemQuantity = (store_name, location, sku) => {
 
 }
 
-
+// getAllItemsInStore('sjsu_pantry') 
+getAllItemsInLocation('sjsu_pantry', 'fridges').then(res => console.log(res)) 
 // getAllItemsInLocation('sjsu_pantry', 'fridges').then(res => console.log(res.first()))
-addItemInLocation('sjsu_pantry', 'fridges')
+// addItemInLocation('sjsu_pantry', 'fridges')
 
