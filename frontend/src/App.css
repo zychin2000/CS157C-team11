@@ -79,3 +79,7 @@ body {
   background-size:cover
 }
 
+.formTable {
+  width:25%;
+  text-align: left;
+}
