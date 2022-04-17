@@ -4,6 +4,12 @@ const path = require('path');
 
 const app = express();
 
-const query = 'SELECT emp_name, emp_phone FROM emp WHERE emp_id = 1';
+// Init Middleware
+app.use(express.json());
 
-db.execute(query).then(result => console.log('User with email %s', result.rows[0].emp_name))
+app.use('/api/auth', require('./src/routes/api/auth'))
+app.use('/api/users', require('./src/routes/api/user'))
+
+const PORT = process.env.PORT || 8000;
+
+app.listen(PORT, () => console.log(`Server started on port ${PORT}`));
