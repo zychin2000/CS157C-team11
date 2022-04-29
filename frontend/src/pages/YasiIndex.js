@@ -25,11 +25,16 @@ function YasiIndex(props) {
         <p>Some more inspirational text or quotes here</p>
       </div>
 
-      <div>
-        <h2>About YASI</h2>
-        <p>YASI is an acroymn for "Yet Another Stock Inventory"</p>
-        <h3>Our Goals</h3>
-        <p>Food</p>
+      <div className="centerContent">
+        <h2 className="centerContent">About YASI</h2>
+        <p className="centerContent">YASI is an acroymn for "Yet Another Stock Inventory." This application is meant to 
+          help giveaway stations such as food pantries have a much more easier time to manage
+          their inventory.
+        </p>
+        <h3 className="centerContent">Our Goals</h3>
+        <p className="centerContent">We firmly believe that everyone should get fed. In making this application,
+          we hope we are able to get food to those in needs with much ease.
+        </p>
       </div>
 
 
