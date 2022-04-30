@@ -4,6 +4,13 @@ const path = require('path');
 
 const app = express();
 
+//disable cross origin checks
+app.use(function(req, res, next) {
+    res.header("Access-Control-Allow-Origin", "*");
+    res.header("Access-Control-Allow-Headers", "Origin, X-Requested-With, Content-Type, Accept, x-auth-token");
+    next();
+  });
+
 // Init Middleware
 app.use(express.json());
 
