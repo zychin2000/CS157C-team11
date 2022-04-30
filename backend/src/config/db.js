@@ -1,16 +1,15 @@
 const cassandra = require('cassandra-driver');
-// const config = require('config');
+const config = require('config');
 // const db = config.get('cassandraURI');
 
-console.log("New Cassandra instance is created!")
-
 const client = new cassandra.Client({ 
-  contactPoints: ['127.0.0.1'],
+  contactPoints: [config.get('cassandraURI')],
   localDataCenter: 'datacenter1',
-  keyspace: 'food_pantry'
+  keyspace: 'cs157c'
 });
 
 client.connect();
+console.log("Connected to Cassandra")
 
 
 module.exports = client;

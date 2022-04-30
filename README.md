@@ -1,10 +1,19 @@
-<<<<<<< HEAD
-# CS157C-team11
-We are gonna create great things.
-=======
 # Getting Started with Create React App
 
 This project was bootstrapped with [Create React App](https://github.com/facebook/create-react-app).
+
+## Backend Quick Start
+### Add a default.json file in config folder (/backend/config) with the following
+
+```json
+{
+  "cassandraURI": "<your_cassandra_uri_with_credentials>",
+  "jwtSecret": "secret"
+}
+```
+
+### Run the server
+Enter the /backend directory and run `npm run dev`
 
 ## Available Scripts
 
@@ -72,4 +81,3 @@ This section has moved here: [https://facebook.github.io/create-react-app/docs/d
 ### `npm run build` fails to minify
 
 This section has moved here: [https://facebook.github.io/create-react-app/docs/troubleshooting#npm-run-build-fails-to-minify](https://facebook.github.io/create-react-app/docs/troubleshooting#npm-run-build-fails-to-minify)
->>>>>>> yasi_ver1
