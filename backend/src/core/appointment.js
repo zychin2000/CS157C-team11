@@ -1,7 +1,17 @@
+const { v4: uuidv4 } = require('uuid');
 const db = require("../config/db")
 
+const scheduleAppointment = (store_name,id = uuidv4,approved = false,description, donor,reserved_date) => {
+    const query = "INSERT INTO Donation_Reservation(store_name,id,approved,description,donor,reserved_date) VALUES (?,?,?,?,?,?)"
+    return db.execute(query,[store_name,id,approved,description,donor,reserved_date])
+}
 
-const addAppointment = (store_name, id, description, email, expiration_date = null, quantity = 1, units = 'unit') => {
-    const query = "INSERT INTO INVENTORY (store_name, location, sku, expiration_date, item_name, quantity, units) VALUES (?, ?, ?, ?, ?, ?, ?)"
-    return db.execute(query, [store_name, location, sku, expiration_date, item_name, quantity, units], { prepare: true })
+const getAllAppointment = () => {
+    const query = "SELECT * FROM Donation_Reservation"
+    db.execute(query)
+}
+
+const getByApproved = (approved) => {
+    const query = "SELECT * FROM Donation_Reservation WHERE approved = ?"
+    db.execute(query,[approved])
 }
