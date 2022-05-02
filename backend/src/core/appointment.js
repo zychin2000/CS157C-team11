@@ -8,10 +8,22 @@ const scheduleAppointment = (store_name,id = uuidv4,approved = false,description
 
 const getAllAppointment = () => {
     const query = "SELECT * FROM Donation_Reservation"
-    db.execute(query)
+    return db.execute(query)
+}
+
+const approve = (id) =>{
+    const query = "SELECT approved FROM Donation_Reservation WHERE id = ?"
+    const approved = db.execute(query,id)
+    query = "UPDATE Donation_Reservation SET approved = ? WHERE id = ?"
+    return db.execute(query,[approved])
 }
 
 const getByApproved = (approved) => {
     const query = "SELECT * FROM Donation_Reservation WHERE approved = ?"
-    db.execute(query,[approved])
+    return db.execute(query,[approved])
+}
+
+const deleteAppointment =(id) => {
+    const query = "DELETE FROM Donation_Reservation WHERE id=?"
+    return db.execute(query,[id])
 }
