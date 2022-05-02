@@ -45,8 +45,8 @@ return(
               <td>{val.description} </td>
               <td>{val.donor}</td>
               <td>{val.reserved_date}</td>
-              <button onClick={del(val.id)}>delete </button>
-              <button onClick={approve(val.id)}>approve </button>
+              <td><button onClick={del(val.id)}>delete </button></td>
+              <td><button onClick={approve(val.id)}>approve </button></td>
             </tr>
           )
         })}
