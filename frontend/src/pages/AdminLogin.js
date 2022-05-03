@@ -3,6 +3,7 @@
 import { React, useEffect, useState } from 'react';
 import { Link } from "react-router-dom";
 import NavBar from '../components/Navbar';
+import api from '../utils/api';
 
 function AdminLogin(props) {
   //login will ask for username/email and password
@@ -11,6 +12,17 @@ function AdminLogin(props) {
 
   //TBD: Access to db and see if user exists...
   const login = (event) => {
+    api.post('/auth/', {
+      email,
+      password
+    }).then(res => {
+      if(res.data.token){
+        localStorage.setItem("admin", JSON.stringify(res.data))
+      }
+      return res.data
+    }).catch(err => {
+      console.log(err.response)
+    })
     event.preventDefault();
     //something here to look for user
   }

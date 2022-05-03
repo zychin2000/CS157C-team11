@@ -18,6 +18,10 @@ import YasiDonorSchedule from './pages/YasiDonorSchedule';
 import AdminLogin from './pages/AdminLogin';
 import NavBar from './components/Navbar';
 
+
+//Reminder to self: Remove YasiItemRateCalc
+//That will be included in the inventory page
+
 function App() {
   return (
     <div>
