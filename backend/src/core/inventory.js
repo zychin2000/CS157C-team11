@@ -28,8 +28,13 @@ const updateItemQuantity = (newQuantity, store_name, location, sku) => {
     return db.execute(query, [newQuantity, store_name, location, sku], {prepare: true})
 }
 
+const deleteItem = (store_name, location, sku) => {
+    const query = "DELETE FROM INVENTORY WHERE store_name=? and location=? and sku=?"
+    return db.execute(query, [store_name, location, sku], {prepare: true})
+}
+
 // getAllItemsInStore('sjsu_pantry') 
 // getAllItemsInLocation('sjsu_pantry', 'fridges').then(res => console.log(res)) 
 // getAllItemsInLocation('sjsu_pantry', 'fridges').then(res => console.log(res.first()))
 // addItemInLocation('sjsu_pantry', 'fridges')
-module.exports = {getAllItemsInStore, getAllItemsInLocation,getItemInLocation, addItemInLocation, updateItemQuantity}
+module.exports = {getAllItemsInStore, getAllItemsInLocation,getItemInLocation, addItemInLocation, updateItemQuantity, deleteItem}

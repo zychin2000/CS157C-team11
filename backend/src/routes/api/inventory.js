@@ -1,7 +1,7 @@
 const express = require('express');
 const router = express.Router();
 const { check, validationResult, param } = require('express-validator');
-const { getAllItemsInLocation, getAllItemsInStore, getItemInLocation, updateItemQuantity, addItemInLocation } = require('../../core/inventory');
+const { getAllItemsInLocation, getAllItemsInStore, getItemInLocation, updateItemQuantity, addItemInLocation, deleteItem } = require('../../core/inventory');
 const auth = require('../../middleware/auth');
 
 // @route    GET inventory/store/:storeName
@@ -52,11 +52,14 @@ router.post('/removeItem', check("storeName", "storeName is required").exists(),
             }
 
             const storeItem = (await getItemInLocation(req.body.storeName, req.body.location, req.body.sku)).first()
-            if(req.body.quantity >= storeItem.quantity) throw "Quantity must be less than quantity!"
-
-            updateItemQuantity(req.body.quantity, req.body.storeName, req.body.location, req.body.sku)
-
-            return res.json("Item quantity removed")
+            if(req.body.quantity > storeItem.quantity) throw "Quantity must be less than quantity!"
+            else if(req.body.quantity == storeItem.quantity){
+                deleteItem(req.body.storeName, req.body.location, req.body.sku)
+            } else
+            {
+                updateItemQuantity(req.body.quantity, req.body.storeName, req.body.location, req.body.sku)
+                return res.json("Item quantity removed")
+            }
         }
         catch (error) {
             console.error(error.message);
