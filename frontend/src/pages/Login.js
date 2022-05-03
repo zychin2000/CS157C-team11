@@ -8,17 +8,31 @@
 import { React, useEffect, useState } from 'react';
 import { Link } from "react-router-dom";
 import NavBar from '../components/Navbar';
+import api from '../utils/api';
 
 const Login = () => {
 
   //login will ask for username/email and password
   const [email, setEmail] = useState('');
   const [password, setPassword] = useState('');
+  const [userType, setUserType] = useState('donor');
 
   //TBD: Access to db and see if user exists...
   const login = (event) => {
-    event.preventDefault();
+    api.post('/auth/', {
+      email,
+      password,
+      userType
+    }).then(res => {
+      if(res.data.token){
+        localStorage.setItem("user", JSON.stringify(res.data))
+      }
+      return res.data
+    }).catch(err => {
+      console.log(err.response)
+    })
     //something here to look for user
+    event.preventDefault()
   }
 
   return (
@@ -27,8 +41,17 @@ const Login = () => {
 
       <h2>Login Form</h2>
       {/* Form for logging in. Input form action later */}
-      <form>
+      <form onSubmit={login}>
         <table className="formTable">
+        <tr>
+            <td><label for="userType">User Type: </label></td>
+            <td>
+              <select type="text" name="userType" value={userType} onChange={(e) => setUserType(e.target.value)}>
+                <option value="donor">Donor</option>
+                <option value="staff">Staff</option>
+              </select>
+              </td>
+          </tr>
           <tr>
             <td><label for="email">Email: </label></td>
             <td><input type="text" name="username" value={email} onChange={(e) => setEmail(e.target.value)} /></td>

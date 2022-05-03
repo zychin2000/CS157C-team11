@@ -5,6 +5,7 @@
 import { React, useEffect, useState } from 'react';
 import ReactDOM from 'react-dom';
 import NavBar from '../components/Navbar';
+import api from '../utils/api';
 
 
 const Register = () => {
@@ -15,10 +16,10 @@ const Register = () => {
   //function that return the appropriate form based on user type selected
   function FormHandler() {
     if (userType === 'staff') {
-      return <StaffForm />
+      return StaffForm()
     }
     else {
-      return <DonorForm />
+      return DonorForm()
     }
   }
 
@@ -158,6 +159,18 @@ const Register = () => {
   //add new Staff user to db
   //TBD!!!
   const addNewStaff = (event) => {
+    let user = {
+      ...user_staff,
+      accountType: 'staff'
+    }
+    api.post('/users/', user).then(res => {
+      if(res.data.token){
+        localStorage.setItem("user", JSON.stringify(res.data))
+      }
+      return res.data
+    }).catch(err => {
+      console.log(err.response)
+    })
     event.preventDefault();
     console.log(event.target.value);
     //something here to add to Staffs
@@ -167,6 +180,18 @@ const Register = () => {
   //add new Donor user to db
   //TBD!!!
   const addNewDonor = (event) => {
+    let donor = {
+      ...user_donor,
+      accountType: 'donor'
+    }
+    api.post('/users/', donor).then(res => {
+      if(res.data.token){
+        localStorage.setItem("user", JSON.stringify(res.data))
+      }
+      return res.data
+    }).catch(err => {
+      console.log(err.response)
+    })
     event.preventDefault();
     console.log(event.target.value);
     //something here to add to Donors
@@ -183,7 +208,7 @@ const Register = () => {
       <p><i>Select what kind of user you are:</i></p>
       <UserTypeIndicatorForm />
       <hr />
-      <FormHandler />
+      {FormHandler()}
     </div>
   );
 

@@ -13,7 +13,10 @@ const {getUserCredentialsByEmail, registerNewUser, createDonorAccount, createSta
 router.post(
     '/',
     check('first_name', 'First name is required').notEmpty(),
-    check('last_name', 'First name is required').notEmpty(),
+    check('last_name', 'Last name is required').notEmpty(),
+    check('username', 'Username is required').notEmpty(),
+    check('contact_info', 'contact_info is required').notEmpty(),
+    check('organization', 'organization is required').notEmpty(),
     check('email', 'Please include a valid email').isEmail(),
     check(
       'password',

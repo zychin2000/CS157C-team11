@@ -16,13 +16,14 @@ router.post(
   '/',
   check('email', 'Please include a valid email').isEmail(),
   check('password', 'Password is required').exists(),
+  check('userType', 'userType must be donor, staff').isIn(['donor', 'staff']),
   async (req, res) => {
     const errors = validationResult(req);
     if (!errors.isEmpty()) {
       return res.status(400).json({ errors: errors.array() });
     }
 
-    const { email, password } = req.body;
+    const { email, password, userType } = req.body;
 
     try {
       let user = await getUserCredentialsByEmail(email);
