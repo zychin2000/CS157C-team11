@@ -18,6 +18,7 @@ function YasiInventory(props) {
   //perhaps, this is where we ought to divert?
   const [inventoryData, setInventoryData] = useState({});
   const [quantityModalData, setQuantityModalData] = useState({ modalVisibility: false, quantity: 0 });
+  const [addItemModalData, setAddItemModalData] = useState({ modalVisibility: false, store_name: "", location: "", sku: "", quantity: 0, units: "", item_name: ""});
   const [selectedItem, setSelectedItem] = useState({});
 
   useEffect(() => {
@@ -32,7 +33,7 @@ function YasiInventory(props) {
       setInventoryData(newData)
     })
 
-  })
+  }, [quantityModalData.modalVisibility, addItemModalData.modalVisibility])
 
   return (
     //TBD: After the navbar here, display options for a logged in user 
@@ -40,12 +41,18 @@ function YasiInventory(props) {
       <NavBar />
       <section>
         <div className='inventory-table' style={{ height: 500, width: '100%' }}>
-          <h1>Inventory Table</h1>
+
+          <div style={{display: "flex", justifyContent:"space-between", padding: '10px'}}>
+            <h1 className='ib'>Inventory Table</h1>
+            <div style={{alignSelf: "center"}}>
+            <Button onClick={(event) => setAddItemModalData({...addItemModalData, modalVisibility:true})} variant= "contained" className='ib'>Add Item</Button>
+            </div>
+          </div>
           <DataGrid initialState={{
             columns: {
               columnVisibilityModel: {
                 // Hide columns storeName, the other columns will remain visible
-                storeName: false,
+                store_name: false,
               },
             },
           }} columns={[
@@ -72,7 +79,7 @@ function YasiInventory(props) {
               width: 130
             },
             {
-              headerName: 'Estimated Supply Left (Days)',
+              headerName: 'Items taken per day',
               field: 'itemVelocity',
               width: 200
             }, {
@@ -152,6 +159,108 @@ function YasiInventory(props) {
         </DialogActions>
       </Dialog>
 
+      <Dialog open={addItemModalData.modalVisibility} onClose={() => { addItemModalData({ ...addItemModalData, "modalVisibility": false }) }}>
+        <DialogTitle>Add an Item</DialogTitle>
+        <DialogContent>
+          <TextField
+            autoFocus
+            margin="dense"
+            id="store_name"
+            label="Store Name"
+            type="string"
+            fullWidth
+            variant="standard"
+            value={addItemModalData.store_name}
+            onChange={(event) => setAddItemModalData({ ...addItemModalData, "store_name": event.target.value })}
+          />
+          <TextField
+            autoFocus
+            margin="dense"
+            id="location"
+            label="Location"
+            type="string"
+            fullWidth
+            variant="standard"
+            value={addItemModalData.location}
+            onChange={(event) => setAddItemModalData({ ...addItemModalData, "location": event.target.value })}
+          />
+          <TextField
+            autoFocus
+            margin="dense"
+            id="sku"
+            label="SKU"
+            type="string"
+            fullWidth
+            variant="standard"
+            value={addItemModalData.sku}
+            onChange={(event) => setAddItemModalData({ ...addItemModalData, "sku": event.target.value })}
+          />
+          <TextField
+            autoFocus
+            margin="dense"
+            id="expiry"
+            label="Expiry Date"
+            type="date"
+            fullWidth
+            variant="standard"
+            value={addItemModalData.expiry_date}
+            onChange={(event) => setAddItemModalData({ ...addItemModalData, "expiry_date": event.target.value })}
+          />
+          <TextField
+            autoFocus
+            margin="dense"
+            id="item_name"
+            label="Item Name"
+            type="string"
+            fullWidth
+            variant="standard"
+            value={addItemModalData.item_name}
+            onChange={(event) => setAddItemModalData({ ...addItemModalData, "item_name": event.target.value })}
+          />
+          <TextField
+            autoFocus
+            margin="dense"
+            id="quantity"
+            label="Quantity"
+            type="number"
+            fullWidth
+            variant="standard"
+            value={addItemModalData.quantity}
+            onChange={(event) => setAddItemModalData({ ...addItemModalData, "quantity": event.target.value })}
+          />
+          <TextField
+            autoFocus
+            margin="dense"
+            id="units"
+            label="Units"
+            type="string"
+            fullWidth
+            variant="standard"
+            value={addItemModalData.units}
+            onChange={(event) => setAddItemModalData({ ...addItemModalData, "units": event.target.value })}
+          />
+        </DialogContent>
+        <DialogActions>
+          <Button onClick={() => { setAddItemModalData({ ...addItemModalData, "modalVisibility": false }) }}>Cancel</Button>
+          <Button onClick={() => {
+            setAddItemModalData({"modalVisibility": false })
+            const body = {
+              "storeName": addItemModalData.store_name,
+              "location": addItemModalData.location,
+              "sku": addItemModalData.sku,
+              "expiry_date": addItemModalData.expiry_date,
+              "item_name": addItemModalData.item_name,
+              "quantity": addItemModalData.quantity,
+              "units": addItemModalData.units
+            }
+            console.log(body)
+            api.post('inventory/addItem', body).then((res) => {
+              alert("Sucessfully added item!")
+            }).catch(err => console.log(err))
+
+          }}>Add Item</Button>
+        </DialogActions>
+      </Dialog>
 
     </div>
   );
