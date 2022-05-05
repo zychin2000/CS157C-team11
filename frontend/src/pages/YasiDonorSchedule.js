@@ -14,6 +14,7 @@ function YasiDonorSchedule (props){
 
     const submit = (event) => {
       //insert into schedule_donation
+
       const body ={
         "store_name": store,
         "id": new Date().getUTCMilliseconds(),
@@ -24,8 +25,9 @@ function YasiDonorSchedule (props){
         "reserved_date":date
       }
       console.log(body)
-      api.post('appointment/addAppointment',body).then((res) =>{
-        alert("Succesfully scheduled donation")
+
+      api.post('/appointment/addAppointment',body).then((res) => {
+        alert("appointment added")
       }).catch(err => console.log(err))
       //something here to look for user
     }
@@ -53,7 +55,7 @@ return(
             <td><input type="text" name="store" value={store} onChange={(e) => setStore(e.target.value)}/></td>
           </tr>
           <tr>
-            <td><br /><input type="submit" value="Submit" /></td>
+            <td><br /><input type="submit" value="Submit" onClick= {submit} /></td>
           </tr>
         </table>
       </form>
