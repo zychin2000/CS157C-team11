@@ -15,6 +15,7 @@ import {
 const token = localStorage.getItem("user");
 console.log(token);
 
+
 //very simple at the moment, will need to ensure token is valid in the first place
 const NavBar = () => {
     //user is logged in

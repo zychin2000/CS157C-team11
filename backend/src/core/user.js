@@ -3,13 +3,13 @@ const db = require("../config/db")
 
 
 const getStaffAccount = (uid) => {
-    const query = "SELECT * FROM Staff WHERE email = ?"
+    const query = "SELECT * FROM Staff WHERE email = ? allow filtering"
     
     return db.execute(query, email)
 }
 
 const getUserCredentialsByEmail = async (email) => {
-    const query = "SELECT * FROM usercredentials WHERE email = ?"
+    const query = "SELECT * FROM usercredentials WHERE email = ? allow filtering"
 
     const res = await db.execute(query, [email], {prepare: true})
 
