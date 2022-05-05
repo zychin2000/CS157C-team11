@@ -10,7 +10,12 @@ import api from '../utils/api';
 
 function YasiAppointments (props){
   //get scheduled appointment appointments
-  const appointments =  api.get('/appointment/appointments')
+  const [appointments, setAppointment] = useState([]);
+  
+  useEffect(() => {
+    api.get('/appointment/appointments').then((res) => setAppointment(res.data))
+
+  }, [])
 
     //define constants or functionalities in here
   function del(store_name,id){
@@ -63,7 +68,7 @@ return(
             </tr>
           )
         })}
-      </table>
+      </table>  
 
   </div>
 );
