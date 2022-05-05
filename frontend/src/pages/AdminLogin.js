@@ -22,6 +22,8 @@ const AdminLogin = () => {
     }).then(res => {
       if(res.data.token){
         localStorage.setItem("user", JSON.stringify(res.data))
+        console.log(res.data)
+        console.log(localStorage.getItem("user"))
         navigate(toAdminMain);
       }
       return res.data

@@ -2,25 +2,19 @@
 import React from 'react';
 import {
     BrowserRouter as Router, Routes,
-    Route, Link, Navigate,
+    Route, Link, Navigate, useNavigate
 } from "react-router-dom";
-
-
+import api from '../utils/api';
 
 //When user is logged in, the navbar should not display the login or register button
 //login button becomes the logout button
 //by default, user is not logged in
 
-//check for token
-const token = localStorage.getItem("user");
-console.log(token);
-
-
-//very simple at the moment, will need to ensure token is valid in the first place
+//check for token in localstorage
 const NavBar = () => {
     //user is logged in
     //add the option to logout
-    if (token != null) {
+    if (localStorage.getItem("user") != null) {
         return (
             <div className="navbar">
                 <div>
@@ -54,5 +48,6 @@ const NavBar = () => {
         </div>
         );
     }
+    
 }
 export default NavBar;
