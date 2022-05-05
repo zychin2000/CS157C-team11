@@ -12,8 +12,35 @@ const getAdminCredentialsByEmail = async (email) => {
     return res.first()
 }
 
+const deleteUserTest = async (email) => {
+    const query = "DELETE FROM food_pantry.usercredentials WHERE email = ? IF EXISTS"
+    const query2 = "DELETE FROM food_pantry.staff where email = ? IF EXISTS"
+
+    const res = await db.execute(query, [email], {prepare: true})
+    const res2 = await db.execute(query2, [email], {prepare: true})
+    return res.first(), res2.first()
+}
+
 const deleteUser = async (email) => {
-    const query = "DELETE FROM food_pantry.usercredentials WHERE email = ? ALLOW FILTERING"
+    await deleteUserFromUserCred(email)
+    await deleteUserFromStaff(email)
+    await deleteUserFromDonor(email)
+}
+
+const deleteUserFromUserCred = async (email) => {
+    const query = "DELETE FROM food_pantry.usercredentials WHERE email = ? IF EXISTS"
+    const res = await db.execute(query, [email], {prepare: true})
+    return res.first()
+}
+
+const deleteUserFromStaff = async (email) => {
+    const query = "DELETE FROM food_pantry.staff WHERE email = ? IF EXISTS"
+    const res = await db.execute(query, [email], {prepare: true})
+    return res.first()
+}
+
+const deleteUserFromDonor = async (email) => {
+    const query = "DELETE FROM food_pantry.donor WHERE email = ? IF EXISTS"
     const res = await db.execute(query, [email], {prepare: true})
     return res.first()
 }
@@ -27,7 +54,7 @@ const getAllUsers = async () =>{
 
 
 
-module.exports = {getAdminCredentialsByEmail, deleteUser, getAllUsers};
+module.exports = {getAdminCredentialsByEmail, deleteUser, getAllUsers, deleteUserFromUserCred};
 //getAdminCredentialsByEmail('sophiecoo1021@cs157corp.com').then(res => console.log(res))
 
 

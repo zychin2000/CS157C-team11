@@ -22,6 +22,7 @@ app.use('/api/inventory', require('./src/routes/api/inventory'))
 app.use('/api/appointment', require('./src/routes/api/appointment'))
 
 
+
 app.use(
   bodyParser.urlencoded({
       extended: false

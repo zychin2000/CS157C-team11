@@ -35,9 +35,9 @@ router.delete('/removeUser', check('email', 'email is required')).exists(), asyn
             return res.status(400).json({ errors: errors.array() });
         }
 
-        //uh
-
-        return res.message
+        //something here
+        let removal = (await deleteUser)
+        return removal.message;
     }
     catch (error) {
         console.error(error.message);
