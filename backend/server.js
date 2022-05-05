@@ -3,6 +3,7 @@ const db = require('./src/config/db');
 const path = require('path');
 
 const app = express();
+var bodyParser = require('body-parser')
 
 //disable cross origin checks
 app.use(function(req, res, next) {
@@ -15,10 +16,22 @@ app.use(function(req, res, next) {
 app.use(express.json());
 
 app.use('/api/auth', require('./src/routes/api/auth'))
+app.use('/api/authadmin', require('./src/routes/api/authadmin'))
 app.use('/api/users', require('./src/routes/api/user'))
 app.use('/api/inventory', require('./src/routes/api/inventory'))
 app.use('/api/appointment', require('./src/routes/api/appointment'))
 
+<<<<<<< HEAD
+=======
+
+
+app.use(
+  bodyParser.urlencoded({
+      extended: false
+  })
+);
+app.use(bodyParser.json());
+>>>>>>> 4cbe3ab4ffd4a8a3809b4b7d2cd7f7629fdac87d
 
 const PORT = process.env.PORT || 8000;
 

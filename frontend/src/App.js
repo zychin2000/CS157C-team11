@@ -13,10 +13,14 @@ import YasiMainAdmin from './pages/YasiMainAdmin';
 import YasiMainDonor from './pages/YasiMainDonor';
 import YasiInventory from './pages/YasiInventory';
 import YasiAppointments from './pages/YasiAppointments';
-import YasiItemRateCalc from './pages/YasiItemRateCalc';
+//import YasiItemRateCalc from './pages/YasiItemRateCalc';
 import YasiDonorSchedule from './pages/YasiDonorSchedule';
 import AdminLogin from './pages/AdminLogin';
 import NavBar from './components/Navbar';
+
+
+//Reminder to self: Remove YasiItemRateCalc
+//That will be included in the inventory page
 
 function App() {
   return (
@@ -33,7 +37,7 @@ function App() {
           <Route path ="/yasimaindonor" element = {<YasiMainDonor />}/>
           <Route path ="/yasiinventory" element = {<YasiInventory />}/>
           <Route path ="/yasiappointments" element = {<YasiAppointments />}/>
-          <Route path ="/yasiitemcalc" element = {<YasiItemRateCalc />}/>
+     {/*      <Route path ="/yasiitemcalc" element = {<YasiItemRateCalc />}/>      */}
           <Route path ="/yasidonorschedule" element = {<YasiDonorSchedule />}/>
         </Routes>
 

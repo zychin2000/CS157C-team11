@@ -2,21 +2,38 @@
 import { React, useEffect, useState } from 'react';
 import { Link } from "react-router-dom";
 import NavBar from '../components/Navbar';
+import api from '../utils/api';
 
 function YasiMainAdmin (props){
     //define constants or functionalities in here
-    //perhaps, this is where we ought to divert?
+    const allUsers = () => {
+      api.get('/adminmanage/getAllUsers')
+    }
+
+    function removeUser (email){
+      api.post('/adminmanage/removeUser', {email}).then(res => {console.log("removed")});
+    }
+
 
 return(
-  //TBD: After the navbar here, display options for a logged in user 
-  //Admin will be able to manage user acounts in general
   <div>
     <NavBar />
     <div>
       <h2>Welcome Admin</h2>
-      <h3>Select among the options:</h3>
+
+      <h3>User Table</h3>
+      <p> to be displayed here... with options to delete woo</p>
+      <table>
+        <tr>
+          <th>userid</th>
+          <th>email</th>
+        </tr>
+
+      </table>
+
+
+
     </div>
-    <h3>TBD: Options to manage user accounts in general (Read/Delete)</h3>
   </div>
 );
 

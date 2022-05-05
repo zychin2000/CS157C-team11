@@ -1,7 +1,11 @@
 const express = require('express');
 const router = express.Router();
 const { check, validationResult, param } = require('express-validator');
+<<<<<<< HEAD
 const { scheduleAppointment,approve,getAllAppointment,deleteAppointment } = require('../../core/appointment');
+=======
+const { scheduleAppointment,approve,getAllAppointment,getByApproved,deleteAppointment } = require('../../core/appointment');
+>>>>>>> 4cbe3ab4ffd4a8a3809b4b7d2cd7f7629fdac87d
 const auth = require('../../middleware/auth');
 
 // @route    GET inventory/store/:storeName

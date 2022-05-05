@@ -69,6 +69,10 @@ const Register = () => {
             <td><input type="text" name="contact_info" value={user_staff.contact_info} onChange={handleStaffChange} /></td>
           </tr>
           <tr>
+          <td><label for="organization">Organization: </label></td>
+          <td><input type="text" name="organization" value={user_staff.organization} onChange={handleStaffChange} /></td>
+          </tr>
+          <tr>
             <td><br /><input type="submit" value="Submit"></input></td>
           </tr>
         </table>
@@ -127,6 +131,7 @@ const Register = () => {
     password: "",
     email: "",
     contact_info: "",
+    organization: "",
   });
 
   //Donor user

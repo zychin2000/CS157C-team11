@@ -14,7 +14,6 @@ function YasiDonorSchedule (props){
 
     const submit = (event) => {
       //insert into schedule_donation
-
       const body ={
         "store_name": store,
         "id": new Date().getUTCMilliseconds(),

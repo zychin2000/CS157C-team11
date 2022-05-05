@@ -1,16 +1,36 @@
 // A login page strictly for Admins
 
 import { React, useEffect, useState } from 'react';
-import { Link } from "react-router-dom";
+import { Link, Redirect, useNavigate } from "react-router-dom";
 import NavBar from '../components/Navbar';
+import api from '../utils/api';
 
-function AdminLogin(props) {
+const AdminLogin = () => {
   //login will ask for username/email and password
   const [email, setEmail] = useState('');
   const [password, setPassword] = useState('');
 
+  //way to navigate if token created
+  const navigate = useNavigate();
+  const toAdminMain = '/yasimainadmin'
+
   //TBD: Access to db and see if user exists...
   const login = (event) => {
+    api.post('/authadmin/', {
+      email,
+      password
+    }).then(res => {
+      if(res.data.token){
+        localStorage.setItem("user", JSON.stringify(res.data))
+        console.log(res.data)
+        console.log(localStorage.getItem("user"))
+        navigate(toAdminMain);
+      }
+      return res.data
+      
+    }).catch(err => {
+      console.log(err.response)
+    })
     event.preventDefault();
     //something here to look for user
   }
@@ -21,7 +41,7 @@ function AdminLogin(props) {
 
       <h2>Admin Login Form</h2>
       {/* Form for logging in. Input form action later */}
-      <form>
+      <form onSubmit={login}>
         <table className="formTable">
           <tr>
             <td><label for="email">Email: </label></td>

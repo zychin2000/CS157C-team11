@@ -6,7 +6,7 @@
 //let user select which one they are
 
 import { React, useEffect, useState } from 'react';
-import { Link } from "react-router-dom";
+import { Link, useNavigate } from "react-router-dom";
 import NavBar from '../components/Navbar';
 import api from '../utils/api';
 
@@ -17,6 +17,11 @@ const Login = () => {
   const [password, setPassword] = useState('');
   const [userType, setUserType] = useState('donor');
 
+  //way to navigate
+  const navigate = useNavigate();
+  const toStaffMain = '/yasimainstaff'
+  const toDonorMain = '/yasimaindonor'
+
   //TBD: Access to db and see if user exists...
   const login = (event) => {
     api.post('/auth/', {
@@ -26,6 +31,14 @@ const Login = () => {
     }).then(res => {
       if(res.data.token){
         localStorage.setItem("user", JSON.stringify(res.data))
+        //navigate to specific main page
+        if(userType == 'staff'){
+          navigate(toStaffMain);
+        }
+        else{
+          navigate(toDonorMain);
+        }
+
       }
       return res.data
     }).catch(err => {
