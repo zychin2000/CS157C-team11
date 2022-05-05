@@ -2,23 +2,37 @@
 import { React, useEffect, useState } from 'react';
 import { Link } from "react-router-dom";
 import NavBar from '../components/Navbar';
+import api from '../utils/api';
+import { DataGrid, GridColDef, GridValueGetterParams } from '@mui/x-data-grid';
 
 
-const appointments =  
-//get scheduled appointment appointments
-//placeholder  
- [{store_name: "dog", id: 1, approved: "false",description:"dog",donor:"dog", reserved_date: "10/22/2022"},
-{store_name: "dog", id: 2, approved: "false",description:"dog",donor:"dog", reserved_date: "10/22/2022"}]
+
+
 
 function YasiAppointments (props){
-    //define constants or functionalities in here
-    function del(id){
-      //Add in delete from db
-    }
+  //get scheduled appointment appointments
+  const appointments =  api.get('/appointment/appointments')
 
-    function approve(id){
-      //add in function to approve/unapprove
+    //define constants or functionalities in here
+  function del(store_name,id){
+    const body = {
+      "store_name":store_name,
+      "id":id
     }
+    api.post('/appointment/deleteAppointment',body).then((res) => {
+      alert("Appointment deleted")
+    }).catch(err => console.log(err))
+  }
+  function approve(store_name,id){
+    //add in function to approve/unapprove
+    const body = {
+      "store_name":store_name,
+       "id":id
+       }
+       api.post('/appointment/approve',body).then((res) => {
+        alert("approved changed")
+      }).catch(err => console.log(err))
+      }
       
 
 return(
@@ -28,7 +42,7 @@ return(
     <table>
         <tr>
           <th>store</th>
-          <th>id</th>
+          <th data-visible="false">id</th>
           <th>approved</th>
           <th>description</th>
           <th>donor</th>
@@ -45,8 +59,8 @@ return(
               <td>{val.description} </td>
               <td>{val.donor}</td>
               <td>{val.reserved_date}</td>
-              <td><button onClick={del(val.id)}>delete </button></td>
-              <td><button onClick={approve(val.id)}>approve </button></td>
+              <td><button onClick={del(val.store_name,val.id)}>delete </button></td>
+              <td><button onClick={approve(val.store_name,val.id)}>approve </button></td>
             </tr>
           )
         })}
