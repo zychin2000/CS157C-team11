@@ -13,6 +13,10 @@ const Register = () => {
   //userType can either be Staff or Donor
   const [userType, setUserType] = useState('staff');
 
+  //display status
+  const [error, setErrorMsg] = useState('')
+  const [status, setStatusMsg] = useState('')
+
   //function that return the appropriate form based on user type selected
   function FormHandler() {
     if (userType === 'staff') {
@@ -162,7 +166,6 @@ const Register = () => {
   };
 
   //add new Staff user to db
-  //TBD!!!
   const addNewStaff = (event) => {
     let user = {
       ...user_staff,
@@ -175,15 +178,13 @@ const Register = () => {
       return res.data
     }).catch(err => {
       console.log(err.response)
+      setErrorMsg('Unable to add Staff. Try again')
     })
     event.preventDefault();
     console.log(event.target.value);
-    //something here to add to Staffs
-    
   }
 
   //add new Donor user to db
-  //TBD!!!
   const addNewDonor = (event) => {
     let donor = {
       ...user_donor,
@@ -199,8 +200,7 @@ const Register = () => {
     })
     event.preventDefault();
     console.log(event.target.value);
-    //something here to add to Donors
-
+    setErrorMsg('Unable to add Donor. Try again')
   }
 
   return (
@@ -210,6 +210,8 @@ const Register = () => {
     <div>
       <NavBar />
       <h2>Registration Form</h2>
+      <p className="errorStatusMessage">{error}</p>
+      <p className="validStatusMessage">{status}</p>
       <p><i>Select what kind of user you are:</i></p>
       <UserTypeIndicatorForm />
       <hr />

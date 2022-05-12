@@ -1,5 +1,5 @@
 import { React, useEffect, useState } from 'react';
-import { Link } from "react-router-dom";
+import { Link, useNavigate  } from "react-router-dom";
 import NavBar from '../components/Navbar';
 import api from '../utils/api';
 
@@ -11,6 +11,12 @@ function YasiDonorSchedule (props){
     const [store, setStore] = useState('');
     const [donor,setDonor] = useState('');
 
+    //to navigate
+    const navigate = useNavigate();
+    const toYasiMainDonor = '/yasimaindonor'
+
+    //display status
+    const [errorMsg, setErrorMsg] = useState('')
 
     const submit = (event) => {
       //insert into schedule_donation
@@ -27,15 +33,20 @@ function YasiDonorSchedule (props){
 
       api.post('/appointment/addAppointment',body).then((res) => {
         alert("appointment added")
-      }).catch(err => console.log(err))
+        //go back to main
+        navigate(toYasiMainDonor)
+      }).catch(err => 
+        console.log(err),
+        setErrorMsg('Could not add Appointment. Please try again'))
       //something here to look for user
     }
 return(
-  //TBD: After the navbar here, display options for a logged in user 
+
   <div>
+    <button><Link to="/yasimaindonor">Return to Main</Link></button>
     <NavBar />
     <form>
-      
+      <p className="errorStatusMessage">{errorMsg}</p>
         <table className="donationForm">
         <tr>
             <td><label for="donor">Donor email</label></td>

@@ -43,6 +43,7 @@ return(
   //TBD: After the navbar here, display options for a logged in user 
   <div className= "YasiAppointments">
     <NavBar />
+    <button><Link to="/yasimainstaff">Return to Main</Link></button>
     <table>
         <tr>
           <th>store</th>

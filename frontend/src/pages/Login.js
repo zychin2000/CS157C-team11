@@ -17,6 +17,9 @@ const Login = () => {
   const [password, setPassword] = useState('');
   const [userType, setUserType] = useState('donor');
 
+  //display status
+  const [errorMsg, setErrorMsg] = useState('')
+
   //way to navigate
   const navigate = useNavigate();
   const toStaffMain = '/yasimainstaff'
@@ -43,6 +46,7 @@ const Login = () => {
       return res.data
     }).catch(err => {
       console.log(err.response)
+      setErrorMsg('Login Failed. Please try again or register for an account')
     })
     //something here to look for user
     event.preventDefault()
@@ -54,6 +58,7 @@ const Login = () => {
 
       <h2>Login Form</h2>
       {/* Form for logging in. Input form action later */}
+      <p className="errorStatusMessage">{errorMsg}</p>
       <form onSubmit={login}>
         <table className="formTable">
         <tr>

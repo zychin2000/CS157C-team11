@@ -28,7 +28,7 @@ router.get('/getAllUsers', async (req, res) => {
 // @route    removeUser
 // @desc     remove user by their email
 // @access   Public
-router.delete('/removeUser', check('email', 'email is required')).exists(), async (req, res) => {
+router.post('/removeUser', param("email", "email is required").exists()), async (req, res) => {
     try{
         const errors = validationResult(req);
         if (!errors.isEmpty()) {
@@ -46,3 +46,4 @@ router.delete('/removeUser', check('email', 'email is required')).exists(), asyn
 }
 
 
+module.exports = router;

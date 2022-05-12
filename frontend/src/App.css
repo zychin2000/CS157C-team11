@@ -97,3 +97,15 @@ body {
   height: 500px;
   width:100%; 
 }
+
+.errorStatusMessage {
+  color: red;
+}
+
+.validStatusMessage {
+  color: green;
+}
+
+.userTable {
+  width: 100%;
+}

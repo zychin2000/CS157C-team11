@@ -5,7 +5,7 @@ const config = require('config');
 const client = new cassandra.Client({ 
   contactPoints: [config.get('cassandraURI')],
   localDataCenter: 'datacenter1',
-  keyspace: 'food_pantry'
+  keyspace: 'cs157c'
 });
 
 client.connect();

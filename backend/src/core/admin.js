@@ -1,7 +1,7 @@
 const db = require("../config/db")
 
 const getAccountById = async (uid) => {
-    const query = "SELECT * FROM admin WHERE uid = ? ALLOW FILTERING"
+    const query = "SELECT * FROM admin WHERE id = ? ALLOW FILTERING"
     const res = await db.execute(query, [uid], {prepare: true})
     return res.first()
 }
@@ -28,19 +28,19 @@ const deleteUser = async (email) => {
 }
 
 const deleteUserFromUserCred = async (email) => {
-    const query = "DELETE FROM food_pantry.usercredentials WHERE email = ? IF EXISTS"
+    const query = "DELETE FROM usercredentials WHERE email = ? IF EXISTS"
     const res = await db.execute(query, [email], {prepare: true})
     return res.first()
 }
 
 const deleteUserFromStaff = async (email) => {
-    const query = "DELETE FROM food_pantry.staff WHERE email = ? IF EXISTS"
+    const query = "DELETE FROM staff WHERE email = ? IF EXISTS"
     const res = await db.execute(query, [email], {prepare: true})
     return res.first()
 }
 
 const deleteUserFromDonor = async (email) => {
-    const query = "DELETE FROM food_pantry.donor WHERE email = ? IF EXISTS"
+    const query = "DELETE FROM donor WHERE email = ? IF EXISTS"
     const res = await db.execute(query, [email], {prepare: true})
     return res.first()
 }

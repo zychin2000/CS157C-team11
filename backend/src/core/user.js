@@ -24,19 +24,19 @@ const registerNewUser = async (email, password, uid) => {
     return res
 }
 
-const createDonorAccount = async (id, contact_info, email, first_name, last_name, organization, verified) => {
+const createDonorAccount = async (id, contact_info, email, first_name, last_name, organization, verified, encrypted_password) => {
 
-    const query = "INSERT INTO donor (id, contact_info, email, first_name, last_name, organization, verified) VALUES (?, ?, ?, ?, ?, ? ,?)"
+    const query = "INSERT INTO donor (id, contact_info, email, first_name, last_name, organization, verified, encrypted_password) VALUES (?, ?, ?, ?, ?, ? ,?, ?)"
 
-    const res = await db.execute(query, [id, contact_info, email, first_name, last_name, organization, verified], {prepare: true})
+    const res = await db.execute(query, [id, contact_info, email, first_name, last_name, organization, verified, encrypted_password], {prepare: true})
     return res
 }
 
-const createStaffAccount = async (id, contact_info, email, first_name, last_name, organization) => {
+const createStaffAccount = async (id, contact_info, email, first_name, last_name, organization, encrypted_password) => {
 
-    const query = "INSERT INTO staff (id, contact_info, email, first_name, last_name, organization) VALUES (?, ?, ?, ?, ?, ?)"
+    const query = "INSERT INTO staff (id, contact_info, email, first_name, last_name, organization, encrypted_password) VALUES (?, ?, ?, ?, ?, ?, ?)"
 
-    const res = await db.execute(query, [id, contact_info, email, first_name, last_name, organization], {prepare: true})
+    const res = await db.execute(query, [id, contact_info, email, first_name, last_name, organization, encrypted_password], {prepare: true})
     return res
 }
 

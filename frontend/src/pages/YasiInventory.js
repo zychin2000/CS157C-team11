@@ -39,6 +39,7 @@ function YasiInventory(props) {
     //TBD: After the navbar here, display options for a logged in user 
     <div>
       <NavBar />
+      <button><Link to="/yasimainstaff">Return to Main</Link></button>
       <section>
         <div className='inventory-table' style={{ height: 500, width: '100%' }}>
 
