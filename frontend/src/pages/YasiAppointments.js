@@ -3,7 +3,6 @@ import { React, useEffect, useState } from 'react';
 import { Link } from "react-router-dom";
 import NavBar from '../components/Navbar';
 import api from '../utils/api';
-import { DataGrid, GridColDef, GridValueGetterParams } from '@mui/x-data-grid';
 
 
 
@@ -11,7 +10,12 @@ import { DataGrid, GridColDef, GridValueGetterParams } from '@mui/x-data-grid';
 
 function YasiAppointments (props){
   //get scheduled appointment appointments
-  const appointments =  api.get('/appointment/appointments')
+  const [appointments, setAppointment] = useState([]);
+  
+  useEffect(() => {
+    api.get('/appointment/appointments').then((res) => setAppointment(res.data))
+
+  }, [])
 
     //define constants or functionalities in here
   function del(store_name,id){
@@ -64,7 +68,7 @@ return(
             </tr>
           )
         })}
-      </table>
+      </table>  
 
   </div>
 );

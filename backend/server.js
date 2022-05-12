@@ -22,14 +22,6 @@ app.use('/api/inventory', require('./src/routes/api/inventory'))
 app.use('/api/appointment', require('./src/routes/api/appointment'))
 
 
-
-app.use(
-  bodyParser.urlencoded({
-      extended: false
-  })
-);
-app.use(bodyParser.json());
-
 const PORT = process.env.PORT || 8000;
 
 app.listen(PORT, () => console.log(`Server started on port ${PORT}`));
