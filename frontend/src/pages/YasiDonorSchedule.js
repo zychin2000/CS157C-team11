@@ -48,7 +48,7 @@ return(
           </tr>
           <tr>
             <td><label for="reserved_date">Appointment date </label></td>
-            <td><input type="text" name="reserved_date" value={date} onChange={(e) => setDate(e.target.value)}/></td>
+            <td><input type="date" name="reserved_date" value={date} onChange={(e) => setDate(e.target.value)}/></td>
           </tr>
           <tr>
             <td><label for="store">Store Name</label></td>
