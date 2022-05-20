@@ -12,7 +12,7 @@ const getAllAppointment = () => {
 }
 
 const approve = (store_name,id) =>{
-    const query = "SELECT approved FROM Donation_Reservation WHERE store_name = ? AND id = ?"
+    let query = "SELECT approved FROM Donation_Reservation WHERE store_name = ? AND id = ?"
     const approved = db.execute(query,[store_name,id],{prepare: true})
     query = "UPDATE Donation_Reservation SET approved = ? WHERE store_name=? AND id = ?"
     return db.execute(query,[!approved,store_name,id],{prepare: true})

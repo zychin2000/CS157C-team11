@@ -41,7 +41,6 @@ router.post('/addAppointment', auth, check("store_name", "storeName is required"
             }
             
             const {store_name,id,approved,description,reserved_date} = req.body
-            console.log("rewsd" + JSON.stringify(req.body))
 
 
             scheduleAppointment(store_name,id,approved,description,req.user.id,reserved_date)
@@ -68,12 +67,13 @@ router.post('/approve', check("store_name", "storeName is required").exists(),
                 return res.status(400).json({ errors: errors.array() });
             }
             const {store_name,id} = req.body
+
             approve(store_name,id)
 
             return res.json("Approved changed")
         }
         catch (error) {
-            console.error(error.message);
+            console.error(error);
             return res.status(400).json({ error });
         }
         

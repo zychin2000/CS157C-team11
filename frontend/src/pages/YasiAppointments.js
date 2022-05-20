@@ -64,8 +64,8 @@ return(
               <td>{val.description} </td>
               <td>{val.donor}</td>
               <td>{val.reserved_date}</td>
-              <td><button onClick={del(val.store_name,val.id)}>delete </button></td>
-              <td><button onClick={approve(val.store_name,val.id)}>approve </button></td>
+              <td><button onClick={() => {del(val.store_name,val.id)}}>delete </button></td>
+              <td><button onClick={() => {approve(val.store_name,val.id)}}>approve </button></td>
             </tr>
           )
         })}

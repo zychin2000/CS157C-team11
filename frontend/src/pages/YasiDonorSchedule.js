@@ -20,7 +20,6 @@ function YasiDonorSchedule (props){
     const [errorMsg, setErrorMsg] = useState('')
 
     const submit = (event) => {
-      event.preventDefault();
       //insert into schedule_donation
       const body ={
         "store_name": store,
@@ -29,12 +28,11 @@ function YasiDonorSchedule (props){
         "reserved_date":date,
         "description":description,
       }
-      console.log(body)
 
       api.post('/appointment/addAppointment',body).then((res) => {
         alert("appointment added")
         //go back to main
-        // navigate(toYasiMainDonor)
+        navigate(toYasiMainDonor)
       }).catch(err => 
         console.log(err),
         setErrorMsg('Could not add Appointment. Please try again'))
