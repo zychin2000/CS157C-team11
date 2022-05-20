@@ -23,4 +23,4 @@ const deleteAppointment =(store_name,id) => {
     const query = "DELETE FROM Donation_Reservation WHERE store_name=? AND id=?"
     return db.execute(query,[store_name,id],{prepare: true})
 }
-//module.exports = {scheduleAppointment,approve,getAllAppointment,getByApproved,deleteAppointment}
+module.exports = {scheduleAppointment,approve,getAllAppointment,deleteAppointment}

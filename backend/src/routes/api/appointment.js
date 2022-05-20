@@ -28,23 +28,23 @@ router.get('/appointments', async (req, res) => {
 // @route    POST addAppointment
 // @desc     Insert a new appointment
 // @access   Public
-router.post('/addAppointment', check("store_name", "storeName is required").exists(),
+router.post('/addAppointment', auth, check("store_name", "storeName is required").exists(),
     check("description", "description is required").exists(),
-    check("donor", "donor is required").exists(),
     check("id", "id is required").exists(),
     check("approved","approved check is required"),
-    check("reserved_date", " reservation date required").exists(),
+    check("reserved_date", " reservation date required").notEmpty(),
     async (req, res) => {
         try {
             const errors = validationResult(req);
             if (!errors.isEmpty()) {
                 return res.status(400).json({ errors: errors.array() });
             }
+            
+            const {store_name,id,approved,description,reserved_date} = req.body
+            console.log("rewsd" + JSON.stringify(req.body))
 
-            const {store_name,id,approved,description,donor,reserved_date} = req.body
 
-
-            scheduleAppointment(store_name,id,approved,description,donor,reserved_date)
+            scheduleAppointment(store_name,id,approved,description,req.user.id,reserved_date)
 
             return res.json("Successfully added appointment!")
         }

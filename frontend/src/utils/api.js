@@ -29,8 +29,9 @@ api.interceptors.response.use(
 api.interceptors.request.use(function (config) {
     const token = JSON.parse(localStorage.getItem('user'));
     // config.headers.Authorization =  token;
-    config.headers['x-auth-token'] = token;
-
+    if(token){
+      config.headers['x-auth-token'] = token.token;
+    }
     return config;
 });
 
