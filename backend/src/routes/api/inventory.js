@@ -1,7 +1,7 @@
 const express = require('express');
 const router = express.Router();
 const { check, validationResult, param } = require('express-validator');
-const { getAllItemsInLocation, getAllItemsInStore, getItemInLocation, updateItemQuantity, addItemInLocation, deleteItem } = require('../../core/inventory');
+const { getAllItemsInLocation, getAllItemsInStore, getItemInLocation, updateItemQuantity, addItemInLocation, deleteItem, getStores } = require('../../core/inventory');
 const auth = require('../../middleware/auth');
 
 // @route    GET inventory/store/:storeName
@@ -95,8 +95,29 @@ router.post('/addItem', check("storeName", "storeName is required").exists(),
             return res.status(400).json({ error });
         }
         
-    })
+        
+})
 
+// @route    GET getStores
+// @desc     Get all the store names in the table
+// @access   Public
+router.get('/getStores',
+    async (req, res) => {
+        try {
+            const errors = validationResult(req);
+            if (!errors.isEmpty()) {
+                return res.status(400).json({ errors: errors.array() });
+            }
+
+            let data = (await getStores()).rows
+        
+            return res.json(data)
+        }
+        catch (error) {
+            console.error(error.message);
+            return res.status(400).json({ error });
+        }
+})
 
 
 

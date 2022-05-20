@@ -33,8 +33,13 @@ const deleteItem = (store_name, location, sku) => {
     return db.execute(query, [store_name, location, sku], {prepare: true})
 }
 
+const getStores = () => {
+    const query = "SELECT DISTINCT store_name from inventory"
+    return db.execute(query)
+}
+
 // getAllItemsInStore('sjsu_pantry') 
 // getAllItemsInLocation('sjsu_pantry', 'fridges').then(res => console.log(res)) 
 // getAllItemsInLocation('sjsu_pantry', 'fridges').then(res => console.log(res.first()))
 // addItemInLocation('sjsu_pantry', 'fridges')
-module.exports = {getAllItemsInStore, getAllItemsInLocation,getItemInLocation, addItemInLocation, updateItemQuantity, deleteItem}
+module.exports = {getAllItemsInStore, getAllItemsInLocation,getItemInLocation, addItemInLocation, updateItemQuantity, deleteItem, getStores}
