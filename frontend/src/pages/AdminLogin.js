@@ -49,7 +49,7 @@ const AdminLogin = () => {
           </tr>
           <tr>
             <td><label for="password">Password: </label></td>
-            <td><input type="text" name="password" value={password} onChange={(e) => setPassword(e.target.value)}/></td>
+            <td><input type="password" name="password" value={password} onChange={(e) => setPassword(e.target.value)}/></td>
           </tr>
           <tr>
             <td><br /><input type="submit" value="Submit" /></td>
