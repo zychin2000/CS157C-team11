@@ -68,7 +68,7 @@ router.post('/approve', check("store_name", "storeName is required").exists(),
             }
             const {store_name,id} = req.body
 
-            approve(store_name,id)
+            await approve(store_name,id)
 
             return res.json("Approved changed")
         }

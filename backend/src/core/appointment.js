@@ -11,11 +11,11 @@ const getAllAppointment = () => {
     return db.execute(query)
 }
 
-const approve = (store_name,id) =>{
+const approve = async (store_name,id) =>{
     let query = "SELECT approved FROM Donation_Reservation WHERE store_name = ? AND id = ?"
-    const approved = db.execute(query,[store_name,id],{prepare: true})
+    const approved = await db.execute(query,[store_name,id],{prepare: true})
     query = "UPDATE Donation_Reservation SET approved = ? WHERE store_name=? AND id = ?"
-    return db.execute(query,[!approved,store_name,id],{prepare: true})
+    return db.execute(query,[!approved.rows[0].approved,store_name,id],{prepare: true})
 }
 
 
