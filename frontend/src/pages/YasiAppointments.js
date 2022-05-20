@@ -11,11 +11,11 @@ import api from '../utils/api';
 function YasiAppointments (props){
   //get scheduled appointment appointments
   const [appointments, setAppointment] = useState([]);
+  const [dataUpdated, setDataUpdated] = useState(false);
   
   useEffect(() => {
     api.get('/appointment/appointments').then((res) => setAppointment(res.data))
-
-  }, [])
+  }, [dataUpdated])
 
     //define constants or functionalities in here
   function del(store_name,id){
@@ -60,12 +60,17 @@ return(
             <tr key={key}>
               <td>{val.store_name}</td>
               <td>{val.id}</td>
-              <td>{val.approved}</td>
+              <td>{String(val.approved)}</td>
               <td>{val.description} </td>
               <td>{val.donor}</td>
               <td>{val.reserved_date}</td>
-              <td><button onClick={() => {del(val.store_name,val.id)}}>delete </button></td>
-              <td><button onClick={() => {approve(val.store_name,val.id)}}>approve </button></td>
+              <td><button onClick={() => {
+                del(val.store_name,val.id) 
+                setDataUpdated(!dataUpdated)}}>delete </button></td>
+              <td><button onClick={() => {
+                approve(val.store_name,val.id)
+                setDataUpdated(!dataUpdated)
+                }}>approve </button></td>
             </tr>
           )
         })}
