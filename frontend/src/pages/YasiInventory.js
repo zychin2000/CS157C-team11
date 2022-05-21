@@ -22,7 +22,7 @@ function YasiInventory(props) {
   const [selectedItem, setSelectedItem] = useState({});
 
   useEffect(() => {
-    api.get("/inventory/store/sjsu_pantry").then((req) => {
+    api.get("/inventory/store/").then((req) => {
       const newData = req.data.map((item) => {
         return {
           ...item,
@@ -163,17 +163,6 @@ function YasiInventory(props) {
       <Dialog open={addItemModalData.modalVisibility} onClose={() => { addItemModalData({ ...addItemModalData, "modalVisibility": false }) }}>
         <DialogTitle>Add an Item</DialogTitle>
         <DialogContent>
-          <TextField
-            autoFocus
-            margin="dense"
-            id="store_name"
-            label="Store Name"
-            type="string"
-            fullWidth
-            variant="standard"
-            value={addItemModalData.store_name}
-            onChange={(event) => setAddItemModalData({ ...addItemModalData, "store_name": event.target.value })}
-          />
           <TextField
             autoFocus
             margin="dense"

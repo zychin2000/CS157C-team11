@@ -6,6 +6,9 @@ import { React, useEffect, useState } from 'react';
 import ReactDOM from 'react-dom';
 import NavBar from '../components/Navbar';
 import api from '../utils/api';
+import Select, { SelectChangeEvent } from '@mui/material/Select';
+import { Menu } from '@mui/material';
+import MenuItem from '@mui/material/MenuItem';
 
 
 const Register = () => {
@@ -16,6 +19,12 @@ const Register = () => {
   //display status
   const [error, setErrorMsg] = useState('')
   const [status, setStatusMsg] = useState('')
+  const [storeOptions, setStoreOptions] = useState([]);
+
+  useEffect(() => {
+    api.get('/inventory/getStores').then(res => setStoreOptions(res.data))
+  }, [])
+
 
   //function that return the appropriate form based on user type selected
   function FormHandler() {
@@ -74,8 +83,19 @@ const Register = () => {
           </tr>
           <tr>
           <td><label for="organization">Organization: </label></td>
-          <td><input type="text" name="organization" value={user_staff.organization} onChange={handleStaffChange} /></td>
-          </tr>
+            <Select
+              labelId="store"
+              id="store"
+              value={user_staff.organization}
+              label="Select Store"
+              onChange={(event) => {
+                event.target.name = "organization"
+                handleStaffChange(event)
+              }}
+            >
+              {storeOptions.map((store) => <MenuItem value={store.store_name}>{store.store_name}</MenuItem>)}
+            </Select>
+            </tr>
           <tr>
             <td><br /><input type="submit" value="Submit"></input></td>
           </tr>

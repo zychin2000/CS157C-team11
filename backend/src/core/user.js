@@ -3,9 +3,9 @@ const db = require("../config/db")
 
 
 const getStaffAccount = (uid) => {
-    const query = "SELECT * FROM Staff WHERE email = ? allow filtering"
+    const query = "SELECT * FROM Staff WHERE id = ? allow filtering"
     
-    return db.execute(query, email)
+    return db.execute(query, [uid], {prepare: true})
 }
 
 const getUserCredentialsByEmail = async (email) => {
@@ -40,4 +40,5 @@ const createStaffAccount = async (id, contact_info, email, first_name, last_name
     return res
 }
 
-module.exports = {getUserCredentialsByEmail, registerNewUser, createDonorAccount, createStaffAccount}
+
+module.exports = {getUserCredentialsByEmail, registerNewUser, createDonorAccount, createStaffAccount, getStaffAccount}
